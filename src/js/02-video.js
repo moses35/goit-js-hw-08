@@ -6,10 +6,8 @@ const player = new Player('vimeo-player');
 //set time for start
 
 player.on('loaded', function () {
-  timeForStart = localStorage.getItem('videoplayer-current-time');
-
   player
-    .setCurrentTime(timeForStart)
+    .setCurrentTime(localStorage.getItem('videoplayer-current-time'))
     .then(function (seconds) {
       // seconds = the actual time that the player seeked to
     })
