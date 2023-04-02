@@ -16,26 +16,29 @@ ckeckLocalStorage();
 //form submit
 function onFormSubmit(evt) {
   evt.preventDefault();
+  try {
+    const objectFromStorage = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    const keysFromObject = Object.keys(objectFromStorage);
+    const valuesFromObject = Object.values(objectFromStorage);
 
-  const objectFromStorage = JSON.parse(localStorage.getItem(STORAGE_KEY));
-  const keysFromObject = Object.keys(objectFromStorage);
-  const valuesFromObject = Object.values(objectFromStorage);
-
-  //form submit if dont have empty values
-  for (let value of valuesFromObject) {
-    if (value === '') {
-      return alert('Fields are empty');
+    //form submit if dont have empty values
+    for (let value of valuesFromObject) {
+      if (value === '') {
+        return alert('Fields are empty');
+      }
     }
-  }
 
-  //form submit if have two values
-  if (keysFromObject.length !== 2) {
+    //form submit if have two values
+    if (keysFromObject.length !== 2) {
+      return alert('Fields are empty');
+    } else {
+      console.log(objectFromStorage);
+      evt.currentTarget.reset();
+      localStorage.removeItem(STORAGE_KEY);
+      formData = {};
+    }
+  } catch (error) {
     return alert('Fields are empty');
-  } else {
-    console.log(objectFromStorage);
-    evt.currentTarget.reset();
-    localStorage.removeItem(STORAGE_KEY);
-    formData = {};
   }
 }
 
