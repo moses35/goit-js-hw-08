@@ -34,12 +34,10 @@ player.on(
     player
       .getCurrentTime()
       .then(function (seconds) {
-        videoCurrentTime = seconds;
+        localStorage.setItem('videoplayer-current-time', seconds);
       })
       .catch(function (error) {
         // an error occurred
       });
-
-    localStorage.setItem('videoplayer-current-time', videoCurrentTime);
   }, 1000)
 );
